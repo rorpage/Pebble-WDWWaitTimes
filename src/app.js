@@ -11,12 +11,12 @@ var splashWindow = new UI.Window();
 var text = new UI.Text({
   position: new Vector2(0, 0),
   size: new Vector2(144, 168),
-  text:'Downloading wait times...',
-  font:'roboto-21-condensed',
-  color:'black',
-  textOverflow:'wrap',
-  textAlign:'center',
-	backgroundColor:'white'
+  text: 'Loading wait times...',
+  font: 'GOTHIC_24_BOLD',
+  color: 'black',
+  textOverflow: 'wrap',
+  textAlign: 'left',
+	backgroundColor: 'white'
 });
 
 // Add to splashWindow and show
@@ -46,8 +46,14 @@ var GetAttraction = function (id) {
       type:'json'
     },
     function(data) {
-      Vibe.vibrate('short');// Create the Card for detailed view
-      var details = data.Description + "\nCurrent wait: " + data.WaitTimeDisplay;
+      var waitTime = data.WaitTimeDisplay;
+      if (waitTime.indexOf("closed") > -1) {
+        waitTime = waitTime
+                      .replace("<span class='closed'>", "")
+                      .replace("</span>", "");
+      }
+      
+      var details = data.Description + "\n\nCurrent wait\n" + waitTime;
       var detailCard = new UI.Card({
         title: data.Name,
         subtitle: data.Location,
