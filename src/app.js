@@ -1,37 +1,12 @@
 var UI = require('ui');
-var Accel = require('ui/accel');
 var ajax = require('ajax');
 var Vibe = require('ui/vibe');
 
-var parseFeed = function(data, quantity) {
-  var items = [];
-  for(var i = 0; i < quantity; i++) {
-    // Add to menu items array
-    items.push({
-      title: data[i].name,
-      subtitle: data[i].waitTime.display
-    });
-  }
-
-  return items;
+var shortVibrate = function() {
+  Vibe.vibrate('short');
 };
 
-var parseWhatsNearMeFeed = function(data, quantity) {
-  var items = [];
-  for(var i = 0; i < quantity; i++) {
-    // Add to menu items array
-    
-    var item = data.Attractions[i];
-    var key = Math.round(Math.abs(item.Key));
-    
-    items.push({
-      title: item.Value.Name,
-      subtitle: key + ' ft'
-    });
-  }
-
-  return items;
-};
+var resultsMenu;
 
 var getAttraction = function (id) {
   ajax(
@@ -40,6 +15,8 @@ var getAttraction = function (id) {
       type:'json'
     },
     function(data) {
+      shortVibrate();
+      
       var waitTime = data.WaitTimeDisplay;
       if (waitTime.indexOf("closed") > -1) {
         waitTime = waitTime
@@ -63,7 +40,91 @@ var getAttraction = function (id) {
   );
 };
 
-var resultsMenu;
+
+// Park Hours
+var parseParkHours = function(data, quantity) {
+  var items = [];
+  for(var i = 0; i < quantity; i++) {
+    var hours = data[i].TodaysHours
+                        .replace("<br />", "+ ");
+    items.push({
+      title: data[i].Name,
+      subtitle: hours
+    });
+  }
+
+  return items;
+};
+
+var getParkHours = function () {
+  ajax(
+    {
+      url:'http://now.wdwnt.com/basicparkinfo/get?getparksonly=true',
+      type:'json'
+    },
+    function(data) {
+      shortVibrate();
+      
+      var items = parseParkHours(data, data.length);
+      resultsMenu = new UI.Menu({
+        sections: [{
+          title: 'Today\'s Park Hours',
+          items: items
+        }]
+      });
+      
+      resultsMenu.show();
+    },
+    function(error) {
+      console.log('Download failed: ' + error);
+    }
+  );
+};
+
+// Weather
+var getWeather = function() {
+    ajax(
+    {
+      url:'http://now.wdwnt.com/weather/get/wdw',
+      type:'json'
+    },
+    function(data) {
+      shortVibrate();
+      
+      var forecasts = data.Forecasts;
+      var text = 'Today\r\n' + forecasts[0].Text + '\r\n' + forecasts[0].High + '° | ' + forecasts[0].Low + '°';
+      text += '\r\n\r\n';
+      text += 'Tomorrow\r\n' + forecasts[1].Text + '\r\n' + forecasts[1].High + '° | ' + forecasts[1].Low + '°';
+      text += '\r\n\r\n';
+      text += forecasts[2].Day + '\r\n' + forecasts[2].Text + '\r\n' + forecasts[2].High + '° | ' + forecasts[2].Low + '°';
+      
+      var detailCard = new UI.Card({
+        title: 'Weather',
+        body: text,
+        scrollable: true
+      });
+    
+      detailCard.show();
+    },
+    function(error) {
+      console.log('Download failed: ' + error);
+    }
+  );
+};
+
+// Top Wait Times
+var parseWaitTimes = function(data, quantity) {
+  var items = [];
+  for(var i = 0; i < quantity; i++) {
+    items.push({
+      title: data[i].name,
+      subtitle: data[i].waitTime.display
+    });
+  }
+
+  return items;
+};
+
 var getWaitTimes = function () {
   ajax(
     {
@@ -71,8 +132,9 @@ var getWaitTimes = function () {
       type:'json'
     },
     function(data) {
-      Vibe.vibrate('short');
-      var items = parseFeed(data, data.length);
+      shortVibrate();
+      
+      var items = parseWaitTimes(data, data.length);
       resultsMenu = new UI.Menu({
         sections: [{
           title: 'Current Wait Times',
@@ -80,26 +142,33 @@ var getWaitTimes = function () {
         }]
       });
       
-      // Register for 'tap' events
-      resultsMenu.on('accelTap', function(e) {
-        var newItems = getWaitTimes();
-        resultsMenu.items(0, newItems);
-      });
-      
-      // Add an action for SELECT
       resultsMenu.on('select', function(e) {
         var item = data[e.itemIndex];
         getAttraction(item.id);
       });
       
-      // Show the Menu, hide the splash
       resultsMenu.show();
-      //splashWindow.hide();
     },
     function(error) {
       console.log('Download failed: ' + error);
     }
   );
+};
+
+// What's Near Me?
+var parseWhatsNearMeFeed = function(data, quantity) {
+  var items = [];
+  for(var i = 0; i < quantity; i++) {
+    var item = data.Attractions[i];
+    var key = Math.round(Math.abs(item.Key));
+    
+    items.push({
+      title: item.Value.Name,
+      subtitle: key + ' ft'
+    });
+  }
+
+  return items;
 };
 
 var getWhatsNearMe = function () {
@@ -109,7 +178,8 @@ var getWhatsNearMe = function () {
       type:'json'
     },
     function(data) {
-      Vibe.vibrate('short');
+      shortVibrate();
+      
       var items = parseWhatsNearMeFeed(data, data.Attractions.length);
       resultsMenu = new UI.Menu({
         sections: [{
@@ -118,13 +188,11 @@ var getWhatsNearMe = function () {
         }]
       });
       
-      // Add an action for SELECT
       resultsMenu.on('select', function(e) {
         var item = data.Attractions[e.itemIndex];
         getAttraction(item.Value.Id);
       });
       
-      // Show the Menu, hide the splash
       resultsMenu.show();
     },
     function(error) {
@@ -133,12 +201,17 @@ var getWhatsNearMe = function () {
   );
 };
 
+// Main Menu
 var buildAndShowMainMenu = function() {
   var items = [];
   items.push({
-    title: "What's Near Me?"
+    title: "Today's Park Hours"
   }, {
     title: "Wait Times"
+  }, {
+    title: "Weather"
+  }, {
+    title: "What's Near Me?"
   });
   
   var mainMenu = new UI.Menu({
@@ -151,17 +224,17 @@ var buildAndShowMainMenu = function() {
   // Add an action for SELECT
   mainMenu.on('select', function(e) {
     if (e.itemIndex === 0) {
-      getWhatsNearMe();
+      getParkHours();
     } else if (e.itemIndex === 1) {
       getWaitTimes();
+    } else if (e.itemIndex === 2) {
+      getWeather();
+    } else if (e.itemIndex === 3) {
+      getWhatsNearMe();
     }
   });
 
   mainMenu.show();  
 };
 
-//getWaitTimes();
 buildAndShowMainMenu();
-
-// Prepare the accelerometer
-Accel.init();

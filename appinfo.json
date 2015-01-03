@@ -1,16 +1,15 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "location"
     ],
     "companyName": "rorpage",
-    "longName": "WDW Wait Times",
+    "longName": "WDWNT Now!",
     "projectType": "pebblejs",
     "resources": {
         "media": [
             {
                 "file": "images/menu_icon.png",
-                "menuIcon": true,
                 "name": "IMAGE_MENU_ICON",
                 "type": "png"
             },
@@ -28,10 +27,16 @@
                 "file": "fonts/UbuntuMono-Regular.ttf",
                 "name": "MONO_FONT_14",
                 "type": "font"
+            },
+            {
+                "file": "images/icon.png",
+                "menuIcon": true,
+                "name": "IMAGES_ICON_PNG",
+                "type": "png"
             }
         ]
     },
-    "shortName": "Wait Times",
+    "shortName": "WDWNT Now!",
     "uuid": "5eff1f86-ffd0-41a7-85e2-7076f0116373",
     "versionCode": 1,
     "versionLabel": "1.0",
