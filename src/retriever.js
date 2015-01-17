@@ -5,7 +5,7 @@ var Helpers = require('helpers');
 
 var retriever = {
   getAttraction: function (id) {
-    API.makeApiCall(Constants.ApiUrl.GetAttraction + id, function (data) {
+    API.makeApiCall(Constants.ApiUrls.GetAttraction + id, function (data) {
       Display.displayAttraction(data);
     });
   },
@@ -53,12 +53,14 @@ var retriever = {
         Helpers.logLocation(pos);
         
         var callback = function (data) {
-          Display.displayWhatsNearMe(data, function (id) {
+          var onclickCallback = function (id) {
             retriever.getAttraction(id);
-          });
+          };
+          
+          Display.displayWhatsNearMe(data.Attractions, onclickCallback);
         };
         
-        // var url = "/Distance/WhatsNearMe?currLat=28.4188341691&currLong=-81.5781962872";
+        //var url = "/Distance/WhatsNearMe?currLat=28.4188341691&currLong=-81.5781962872";
         var url = Constants.ApiUrls.GetWhatsNearMe + "?currLat=" + pos.coords.latitude + "&currLong=" + pos.coords.longitude;
         API.makeApiCall(url, callback);
       },

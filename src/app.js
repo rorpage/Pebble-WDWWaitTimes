@@ -6,7 +6,7 @@ var buildAndShowMainMenu = function() {
   var items = [];
   items.push(
     { title: "Today's Park Hours" }, 
-    { title: "Wait Times" }, 
+    { title: "Top Wait Times" }, 
     { title: "Weather" }, 
     { title: "What's Near Me?" }
   );

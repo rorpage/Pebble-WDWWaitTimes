@@ -70,20 +70,19 @@ var display = {
   
   displayWeather: function (data) {
     var forecasts = data.Forecasts;
-    var text = 'Today\r\n' + forecasts[0].Text + '\r\n' + forecasts[0].High + '° | ' + forecasts[0].Low + '°';
-    text += '\r\n\r\n';
-    text += 'Tomorrow\r\n' + forecasts[1].Text + '\r\n' + forecasts[1].High + '° | ' + forecasts[1].Low + '°';
-    text += '\r\n\r\n';
-    text += forecasts[2].Day + '\r\n' + forecasts[2].Text + '\r\n' + forecasts[2].High + '° | ' + forecasts[2].Low + '°';
+    var text = "Today\r\n" + forecasts[0].Text + "\r\n" + forecasts[0].High + "° | " + forecasts[0].Low + "°";
+    text += "\r\n\r\n";
+    text += "Tomorrow\r\n" + forecasts[1].Text + "\r\n" + forecasts[1].High + "° | " + forecasts[1].Low + "°";
+    text += "\r\n\r\n";
+    text += forecasts[2].Day + "\r\n" + forecasts[2].Text + "\r\n" + forecasts[2].High + "° | " + forecasts[2].Low + "°";
   
-    Helpers.displayScrollableCard('Weather', null, text);
+    Helpers.displayScrollableCard("Weather", null, text);
   },
     
   displayWhatsNearMe: function (data, onclickCallback) {
     var items = [];
-    console.log("data.length: " + data.length);
     for(var i = 0; i < data.length; i++) {
-      var item = data.Attractions[i];
+      var item = data[i];
       var key = Math.round(Math.abs(item.Key));
   
       items.push({
@@ -92,7 +91,6 @@ var display = {
       });
     }
   
-    console.log("items.length: " + items.length);
     if (items.length === 0) {
       Helpers.displayError("We couldn't find anything near you. Are you at a Disney park currently?", "User not in a Disney park");
     } else {
@@ -104,7 +102,7 @@ var display = {
       });
   
       resultsMenu.on('select', function(e) {
-        var item = data.Attractions[e.itemIndex];
+        var item = data[e.itemIndex];
         onclickCallback(item.Value.Id);
       });
       
