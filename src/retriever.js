@@ -20,24 +20,22 @@ var retriever = {
     API.makeApiCall(Constants.ApiUrls.GetParkHours, callback);
   },
   
-  getTopWaitTimes: function () {
+  retrieveWaitTimes: function (url) {
     var callback = function (data) {
       Display.displayWaitTimes(data, function (id) {
         retriever.getAttraction(id);
       });
     };
-    
-    API.makeApiCall(Constants.ApiUrls.GetTopAttractionWaitTimes, callback);
+  
+    API.makeApiCall(url, callback);  
+  },
+  
+  getTopWaitTimes: function () {
+    retriever.retrieveWaitTimes(Constants.ApiUrls.GetTopAttractionWaitTimes);
   },
   
   getWaitTimes: function (parkId) {
-    var callback = function (data) {
-      Display.displayWaitTimes(data, function (id) {
-        retriever.getAttraction(id);
-      });
-    };
-    
-    API.makeApiCall(Constants.ApiUrls.GetWaitTimesByPark + parkId, callback);
+    retriever.retrieveWaitTimes(Constants.ApiUrls.GetWaitTimesByPark + parkId);
   },
   
   getWeather: function () {
