@@ -1,17 +1,56 @@
 var Helpers = require('helpers');
 var UI = require('ui');
+var Utility = require('utility');
 
 var display = {
   displayAttraction: function (data) {
     var waitTime = data.WaitTimeDisplay;
     if (waitTime.indexOf("closed") > -1) {
       waitTime = waitTime
-      .replace("<span class='closed'>", "")
-      .replace("</span>", "");
+        .replace("<span class='closed'>", "")
+        .replace("</span>", "");
     }
 
-    var details = data.Description + "\n\nCurrent wait\n" + waitTime;
+    var description = Utility.cleanseString(data.Description);
+    var details = description + "\n\nCurrent wait:\n" + waitTime;
     Helpers.displayScrollableCard(data.Name, data.Location, details);
+  },
+  
+  displayFacilityList: function (data, menuTitle, onclickCallback) {
+    var items = [];
+    
+    if (data.length === 0) {
+      Helpers.displayScrollableCard("None currently listed");
+    } else {
+      for(var i = 0; i < data.length; i++) {
+        var facility = data[i];
+        
+        // Attractions
+        var subtitle = facility.Location;
+        if (facility.ShortWaitTimeDisplay) {
+          subtitle = facility.ShortWaitTimeDisplay;
+        }
+        
+        items.push({
+          title: facility.Name,
+          subtitle: subtitle
+        });
+      }
+    
+      var resultsMenu = new UI.Menu({
+        sections: [{
+          title: menuTitle,
+          items: items
+        }]
+      });
+    
+      resultsMenu.on('select', function(e) {
+        var facility = data[e.itemIndex];
+        onclickCallback(facility.Id);
+      });
+    
+      resultsMenu.show();
+    }
   },
   
   displayParkHours: function (data, onclickCallback) {
@@ -40,12 +79,29 @@ var display = {
     resultsMenu.show();
   },
   
+  displayRestaurant: function (data) {
+    var description = Utility.cleanseString(data.Description);
+    var details = description + 
+        "\n\nCuisine:\n" + data.Cuisine + 
+        "\n\nToday's hours:\n" + data.TodaysHours;
+    Helpers.displayScrollableCard(data.Name, data.Location, details);
+  },
+  
+  displayShop: function (data) {
+    var description = Utility.cleanseString(data.Description);
+    var details = description + 
+        "\n\nMerchandise offerings:\n" + data.MerchandiseOfferingsDisplay + 
+        "\n\nToday's hours:\n" + data.TodaysHours;
+    Helpers.displayScrollableCard(data.Name, data.Location, details);
+  },
+  
   displayWaitTimes: function (data, onclickCallback) {
     var items = [];
     for(var i = 0; i < data.length; i++) {
+      var item = data[i];
       items.push({
-        title: data[i].name,
-        subtitle: data[i].waitTime.display
+        title: item.name,
+        subtitle: item.waitTime.shortDisplay
       });
     }
     
@@ -70,11 +126,11 @@ var display = {
   
   displayWeather: function (data) {
     var forecasts = data.Forecasts;
-    var text = "Today\r\n" + forecasts[0].Text + "\r\n" + forecasts[0].High + "° | " + forecasts[0].Low + "°";
-    text += "\r\n\r\n";
-    text += "Tomorrow\r\n" + forecasts[1].Text + "\r\n" + forecasts[1].High + "° | " + forecasts[1].Low + "°";
-    text += "\r\n\r\n";
-    text += forecasts[2].Day + "\r\n" + forecasts[2].Text + "\r\n" + forecasts[2].High + "° | " + forecasts[2].Low + "°";
+    var text = "Today\n" + forecasts[0].Text + "\n" + forecasts[0].High + "° | " + forecasts[0].Low + "°";
+    text += "\n\n";
+    text += "Tomorrow\n" + forecasts[1].Text + "\n" + forecasts[1].High + "° | " + forecasts[1].Low + "°";
+    text += "\n\n";
+    text += forecasts[2].Day + "\n" + forecasts[2].Text + "\n" + forecasts[2].High + "° | " + forecasts[2].Low + "°";
   
     Helpers.displayScrollableCard("Weather", null, text);
   },

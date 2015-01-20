@@ -3,7 +3,10 @@ var constants = {
   
   "ApiUrls": {
     GetAttraction: "/attraction/get/",
+    GetFacilities: "/facility/get",
     GetParkHours: "/basicparkinfo/get?getparksonly=true",
+    GetRestaurant: "/restaurant/get/",
+    GetShop: "/shop/get/",
     GetTopAttractionWaitTimes: "/topattractions/get",
     GetWaitTimesByPark: "/waittimes/getbypark?parkId=",
     GetWeather: "/weather/get/wdw",
