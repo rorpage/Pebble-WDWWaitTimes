@@ -16,6 +16,16 @@ var display = {
     Helpers.displayScrollableCard(data.Name, data.Location, details);
   },
   
+  displayEntertainment: function (data) {
+    var description = Utility.cleanseString(data.Description);
+    var todaysSchedule = (data.TodaysSchedulesDisplay === "") ? 
+        "Nothing left today" : 
+        data.TodaysSchedulesDisplay;
+    var details = description + 
+        "\n\nToday's schedule:\n" + todaysSchedule;
+    Helpers.displayScrollableCard(data.Name, data.Location, details);
+  },
+  
   displayFacilityList: function (data, menuTitle, onclickCallback) {
     var items = [];
     
@@ -24,12 +34,9 @@ var display = {
     } else {
       for(var i = 0; i < data.length; i++) {
         var facility = data[i];
-        
-        // Attractions
-        var subtitle = facility.Location;
-        if (facility.ShortWaitTimeDisplay) {
-          subtitle = facility.ShortWaitTimeDisplay;
-        }
+        var subtitle = (facility.ShortWaitTimeDisplay) ? 
+            facility.ShortWaitTimeDisplay : 
+            facility.Location;
         
         items.push({
           title: facility.Name,
@@ -57,7 +64,7 @@ var display = {
     var items = [];
     for(var i = 0; i < data.length; i++) {
       var hours = data[i].TodaysHours
-      .replace("<br />", "+ ");
+        .replace("<br />", "+ ");
       items.push({
         title: data[i].Name,
         subtitle: hours

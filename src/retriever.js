@@ -12,6 +12,7 @@ var retriever = {
         var items = [];
         items.push(
           { title: "Attractions" }, 
+          { title: "Entertainment" }, 
           { title: "Restaurants" }, 
           { title: "Shops" }
         );
@@ -28,8 +29,10 @@ var retriever = {
           if (e.itemIndex === 0) {
             retriever.getAttractions(parkId);
           } else if (e.itemIndex === 1) {
-            retriever.getRestaurants(parkId);
+            retriever.getEntertainments(parkId);
           } else if (e.itemIndex === 2) {
+            retriever.getRestaurants(parkId);
+          } else if (e.itemIndex === 3) {
             retriever.getShops(parkId);
           }
         });
@@ -78,6 +81,18 @@ var retriever = {
   getAttraction: function (id) {
     API.makeApiCall(Constants.ApiUrls.GetAttraction + id, function (data) {
       Display.displayAttraction(data);
+    });
+  },
+  
+  getEntertainments: function (parkId) {
+    retriever.retrieveFacilities(parkId, "Entertainment", "Entertainment", function (id) {
+      retriever.getEntertainment(id);
+    });
+  },
+  
+  getEntertainment: function (id) {
+    API.makeApiCall(Constants.ApiUrls.GetEntertainment + id, function (data) {
+      Display.displayEntertainment(data);
     });
   },
   
