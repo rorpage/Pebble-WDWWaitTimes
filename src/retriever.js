@@ -64,8 +64,8 @@ var retriever = {
   
   retrieveFacilities: function (location, facilityType, facilityListMenuTitle, facilityListOnclickCallback) {
     var callback = function (data) {
-      Display.displayFacilityList(data, facilityListMenuTitle, function (id) {
-        facilityListOnclickCallback(id);
+      Display.displayFacilityList(data, facilityListMenuTitle, function (facility) {
+        facilityListOnclickCallback(facility);
       });
     };
     
@@ -73,8 +73,8 @@ var retriever = {
   },
   
   getAttractions: function (parkId) {
-    retriever.retrieveFacilities(parkId, "Attraction", "Attractions", function (id) {
-      retriever.getAttraction(id);
+    retriever.retrieveFacilities(parkId, "Attraction", "Attractions", function (facility) {
+      retriever.getAttraction(facility.Id);
     });
   },
   
@@ -85,8 +85,8 @@ var retriever = {
   },
   
   getEntertainments: function (parkId) {
-    retriever.retrieveFacilities(parkId, "Entertainment", "Entertainment", function (id) {
-      retriever.getEntertainment(id);
+    retriever.retrieveFacilities(parkId, "Entertainment", "Entertainment", function (facility) {
+      retriever.getEntertainment(facility.Id);
     });
   },
   
@@ -97,15 +97,46 @@ var retriever = {
   },
   
   getRestaurants: function (parkId) {
-    retriever.retrieveFacilities(parkId, "restaurant", "Restaurants", function (id) {
-      retriever.getRestaurant(id);
+    var callback = function (facility) {
+      var items = [];
+      items.push(
+        { title: "Info" }, 
+        { title: "Menus" }
+      );
+
+      var restaurantMenu = new UI.Menu({
+        sections: [{
+          title: facility.Name,
+          items: items
+        }]
+      });
+
+      restaurantMenu.on('select', function(e) {
+        if (e.itemIndex === 0) {
+          retriever.getRestaurant(facility.Id);
+        } else if (e.itemIndex === 1) {
+          retriever.getRestaurantMenu(facility.Id);
+        }
+      });
+
+      restaurantMenu.show();
+    };
+    
+    retriever.retrieveFacilities(parkId, "restaurant", "Restaurants", callback);
+  },
+  
+  retrieveRestaurant: function (id, isMenu) {
+    API.makeApiCall(Constants.ApiUrls.GetRestaurant + id, function (data) {
+      Display.displayRestaurant(data, isMenu);
     });
   },
   
   getRestaurant: function (id) {
-    API.makeApiCall(Constants.ApiUrls.GetRestaurant + id, function (data) {
-      Display.displayRestaurant(data);
-    });
+    retriever.retrieveRestaurant(id, false);
+  },
+  
+  getRestaurantMenu: function (id) {
+    retriever.retrieveRestaurant(id, true);
   },
   
   getShops: function (parkId) {

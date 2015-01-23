@@ -53,7 +53,7 @@ var display = {
     
       resultsMenu.on('select', function(e) {
         var facility = data[e.itemIndex];
-        onclickCallback(facility.Id);
+        onclickCallback(facility);
       });
     
       resultsMenu.show();
@@ -86,12 +86,52 @@ var display = {
     resultsMenu.show();
   },
   
-  displayRestaurant: function (data) {
-    var description = Utility.cleanseString(data.Description);
-    var details = description + 
-        "\n\nCuisine:\n" + data.Cuisine + 
-        "\n\nToday's hours:\n" + data.TodaysHours;
-    Helpers.displayScrollableCard(data.Name, data.Location, details);
+  displayRestaurant: function (data, isMenu) {
+    if (isMenu) {
+      var items = [];
+      var sections = [];
+      for(var m = 0; m < data.Menus.length; m++) {
+        var menu = data.Menus[m];
+        for(var i = 0; i < menu.MenuItems.length; i++) {
+          var menuItem = menu.MenuItems[i];
+          items.push({
+            title: menuItem.Name,
+            subtitle: menuItem.PriceDisplay
+          });
+        }
+        
+        sections.push({
+          title: menu.MealPeriodType,
+          items: items
+        });
+        
+        items = [];
+      }
+    
+      var resultsMenu = new UI.Menu({ sections: sections }).show();
+      resultsMenu.show();
+    } else {
+      var averageEntreePricesDisplay = "";
+      for(var a = 0; a < data.Menus.length; a++) {
+        var menuForEntreeAvg = data.Menus[a];
+        if (menuForEntreeAvg.AverageEntreePrice !== null) {
+          averageEntreePricesDisplay = averageEntreePricesDisplay + 
+            menuForEntreeAvg.MealPeriodType + " - " + 
+            menuForEntreeAvg.AverageEntreePrice + "\n";
+        }
+      }
+      
+      var description = Utility.cleanseString(data.Description);
+      var details = description + 
+          "\n\nCuisine:\n" + data.Cuisine + 
+          "\n\nToday's hours:\n" + data.TodaysHours;
+      
+      if (averageEntreePricesDisplay !== "") {
+        details += "\n\nAverage entrée prices:\n" + averageEntreePricesDisplay;
+      }
+      
+      Helpers.displayScrollableCard(data.Name, data.Location, details);
+    }
   },
   
   displayShop: function (data) {

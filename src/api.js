@@ -9,11 +9,9 @@ var api = {
       title: "Loading data..."
     }).show();
 
-    var apiUrl = Constants.ApiBaseUrl + url;
-    console.log("Retrieving data from '" + apiUrl + "'...");
-    
+    console.log("Loading data...");
     ajax(
-      { url: apiUrl, type: 'json' },
+      { url: Constants.ApiBaseUrl + url, type: 'json' },
       function (data) {
         card.hide();
         Helpers.shortVibrate();
