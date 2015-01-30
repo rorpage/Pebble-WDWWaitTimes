@@ -140,8 +140,8 @@ var retriever = {
   },
   
   getShops: function (parkId) {
-    retriever.retrieveFacilities(parkId, "MerchandiseFacility", "Shops", function (id) {
-      retriever.getShop(id);
+    retriever.retrieveFacilities(parkId, "MerchandiseFacility", "Shops", function (facility) {
+      retriever.getShop(facility.Id);
     });
   },
   

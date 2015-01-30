@@ -4,15 +4,8 @@ var Utility = require('utility');
 
 var display = {
   displayAttraction: function (data) {
-    var waitTime = data.WaitTimeDisplay;
-    if (waitTime.indexOf("closed") > -1) {
-      waitTime = waitTime
-        .replace("<span class='closed'>", "")
-        .replace("</span>", "");
-    }
-
     var description = Utility.cleanseString(data.Description);
-    var details = description + "\n\nCurrent wait:\n" + waitTime;
+    var details = description + "\n\nCurrent status:\n" + data.ShortWaitTimeDisplay;
     Helpers.displayScrollableCard(data.Name, data.Location, details);
   },
   
