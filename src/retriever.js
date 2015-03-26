@@ -74,7 +74,7 @@ var retriever = {
   
   getAttractions: function (parkId) {
     retriever.retrieveFacilities(parkId, "Attraction", "Attractions", function (facility) {
-      retriever.getAttraction(facility.Id);
+      retriever.getAttraction(facility.FacilityId);
     });
   },
   
@@ -86,7 +86,7 @@ var retriever = {
   
   getEntertainments: function (parkId) {
     retriever.retrieveFacilities(parkId, "Entertainment", "Entertainment", function (facility) {
-      retriever.getEntertainment(facility.Id);
+      retriever.getEntertainment(facility.FacilityId);
     });
   },
   
@@ -113,9 +113,9 @@ var retriever = {
 
       restaurantMenu.on('select', function(e) {
         if (e.itemIndex === 0) {
-          retriever.getRestaurant(facility.Id);
+          retriever.getRestaurant(facility.FacilityId);
         } else if (e.itemIndex === 1) {
-          retriever.getRestaurantMenu(facility.Id);
+          retriever.getRestaurantMenu(facility.FacilityId);
         }
       });
 
@@ -141,7 +141,7 @@ var retriever = {
   
   getShops: function (parkId) {
     retriever.retrieveFacilities(parkId, "MerchandiseFacility", "Shops", function (facility) {
-      retriever.getShop(facility.Id);
+      retriever.getShop(facility.FacilityId);
     });
   },
   

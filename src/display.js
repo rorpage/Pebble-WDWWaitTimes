@@ -27,13 +27,9 @@ var display = {
     } else {
       for(var i = 0; i < data.length; i++) {
         var facility = data[i];
-        var subtitle = (facility.ShortWaitTimeDisplay) ? 
-            facility.ShortWaitTimeDisplay : 
-            facility.Location;
-        
         items.push({
           title: facility.Name,
-          subtitle: subtitle
+          subtitle: facility.Subtitle
         });
       }
     
