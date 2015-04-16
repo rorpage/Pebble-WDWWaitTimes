@@ -5,8 +5,10 @@ var UI = require('ui');
 var buildAndShowMainMenu = function() {
   var items = [];
   items.push(
-    { title: "Parks" }, 
-    { title: "Top Wait Times" }, 
+    { title: "Hours" }, 
+    { title: "Ride" }, 
+    { title: "Dine" }, 
+    { title: "Plans" }, 
     { title: "Weather" }, 
     { title: "What's Near Me?" }
   );
@@ -22,10 +24,14 @@ var buildAndShowMainMenu = function() {
     if (e.itemIndex === 0) {
       Retriever.getParkHours();
     } else if (e.itemIndex === 1) {
-      Retriever.getTopWaitTimes();
+      Retriever.getRideList();
     } else if (e.itemIndex === 2) {
-      Retriever.getWeather();
+      Retriever.getDineList();
     } else if (e.itemIndex === 3) {
+      Retriever.getPlans();
+    } else if (e.itemIndex === 4) {
+      Retriever.getWeather();
+    } else if (e.itemIndex === 5) {
       Retriever.getCurrentPositionForWhatsNearMe();
     }
   });
