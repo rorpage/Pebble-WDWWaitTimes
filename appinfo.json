@@ -4,6 +4,10 @@
         "location"
     ],
     "sdkVersion": "3",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
     "companyName": "rorpage",
     "longName": "WDWNT Now!",
     "projectType": "pebblejs",
