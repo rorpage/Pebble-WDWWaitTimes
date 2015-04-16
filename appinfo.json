@@ -3,6 +3,7 @@
     "capabilities": [
         "location"
     ],
+    "sdkVersion": "3"
     "companyName": "rorpage",
     "longName": "WDWNT Now!",
     "projectType": "pebblejs",
