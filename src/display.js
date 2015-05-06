@@ -49,6 +49,36 @@ var display = {
     }
   },
   
+  displayPlans: function (data, onclickCallback) {
+    var items = [];
+    
+    if (data.length === 0) {
+      Helpers.displayScrollableCard("None currently listed");
+    } else {
+      for(var i = 0; i < data.length; i++) {
+        var facility = data[i];
+        items.push({
+          title: facility.Name,
+          subtitle: facility.Time
+        });
+      }
+    
+      var resultsMenu = new UI.Menu({
+        sections: [{
+          title: "Your Plans",
+          items: items
+        }]
+      });
+    
+      resultsMenu.on('select', function(e) {
+        var facility = data[e.itemIndex];
+        onclickCallback(facility);
+      });
+    
+      resultsMenu.show();
+    }
+  },
+  
   displayParkHours: function (data, onclickCallback) {
     var items = [];
     for(var i = 0; i < data.length; i++) {

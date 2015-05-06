@@ -1,13 +1,14 @@
 var constants = {
-  "ApiBaseUrl": "http://now.wdwnt.com",
+  "ApiBaseUrl": "https://wdwquickinfo.azurewebsites.net",
   
   "ApiUrls": {
-    GetAttraction: "/attraction/get/",
-    GetEntertainment: "/entertainment/get/",
-    GetFacilities: "/facility/get",
+    GetAttraction: "/pebble/api/getattraction/",
+    GetEntertainment: "/pebble/api/getentertainment/",
+    GetFacilities: "/pebble/api/getfacilities",
     GetParkHours: "/basicparkinfo/get?getparksonly=true",
-    GetRestaurant: "/restaurant/get/",
-    GetShop: "/shop/get/",
+    GetPlans: "/pebble/api/getitinerary/",
+    GetRestaurant: "/pebble/api/getrestaurant/",
+    GetShop: "/pebble/api/getshop/",
     GetTopAttractionWaitTimes: "/topattractions/get",
     GetWaitTimesByPark: "/waittimes/getbypark?parkId=",
     GetWeather: "/weather/get/wdw",

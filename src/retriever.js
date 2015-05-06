@@ -125,7 +125,17 @@ var retriever = {
   },
   
   getPlans: function () {
-    // todo
+    API.makeApiCall(Constants.ApiUrls.GetPlans + "?userid=1&apiaccesstoken=ae9176bd-6396-43b9-88fd-b38b430ab699", function (data) {
+      Display.displayPlans(data, function (facility) {
+        if (facility.FacilityType === 0) {
+          retriever.getAttraction(facility.FacilityId);
+        } else if (facility.FacilityType === 2) {
+          retriever.getEntertainment(facility.FacilityId);
+        } else if (facility.FacilityType === 8) {
+          retriever.getRestaurant(facility.FacilityId);
+        }
+      });
+    });
   },
   
   retrieveFacilities: function (location, facilityType, facilityListMenuTitle, facilityListOnclickCallback) {
@@ -135,7 +145,7 @@ var retriever = {
       });
     };
     
-    API.makeApiCall(Constants.ApiUrls.GetFacilities + "?location=" + location + "&type=" + facilityType, callback);
+    API.makeApiCall(Constants.ApiUrls.GetFacilities + "?locationId=" + location + "&facilityType=" + facilityType, callback);
   },
   
   getAttractions: function (parkId) {
