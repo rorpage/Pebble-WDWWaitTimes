@@ -2,6 +2,7 @@ var API = require('api');
 var Constants = require('constants');
 var Display = require('display');
 var Helpers = require('helpers');
+var Settings = require('settings');
 var UI = require('ui');
 var Utility = require('utility');
 
@@ -125,7 +126,10 @@ var retriever = {
   },
   
   getPlans: function () {
-    API.makeApiCall(Constants.ApiUrls.GetPlans + "?userid=1&apiaccesstoken=ae9176bd-6396-43b9-88fd-b38b430ab699", function (data) {
+    var url = Constants.ApiUrls.GetPlans + 
+      "?userid=" + Settings.option("userid") +
+      "&apiaccesstoken=" + Settings.option("apiaccesstoken");
+    API.makeApiCall(url, function (data) {
       Display.displayPlans(data, function (facility) {
         if (facility.FacilityType === 0) {
           retriever.getAttraction(facility.FacilityId);
@@ -156,7 +160,7 @@ var retriever = {
   
   getAttraction: function (id) {
     API.makeApiCall(Constants.ApiUrls.GetAttraction + id, function (data) {
-      Display.displayAttraction(data);
+      Display.displayFacility(data);
     });
   },
   
@@ -168,7 +172,7 @@ var retriever = {
   
   getEntertainment: function (id) {
     API.makeApiCall(Constants.ApiUrls.GetEntertainment + id, function (data) {
-      Display.displayEntertainment(data);
+      Display.displayFacility(data);
     });
   },
   
@@ -223,7 +227,7 @@ var retriever = {
   
   getShop: function (id) {
     API.makeApiCall(Constants.ApiUrls.GetShop + id, function (data) {
-      Display.displayShop(data);
+      Display.displayFacility(data);
     });
   },
   

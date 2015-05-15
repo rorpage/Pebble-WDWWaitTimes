@@ -2,6 +2,7 @@ var constants = {
   "ApiBaseUrl": "https://wdwquickinfo.azurewebsites.net",
   
   "ApiUrls": {
+    Config: "/pebble/config?timelineusertoken=",
     GetAttraction: "/pebble/api/getattraction/",
     GetEntertainment: "/pebble/api/getentertainment/",
     GetFacilities: "/pebble/api/getfacilities",

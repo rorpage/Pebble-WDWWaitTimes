@@ -1,21 +1,25 @@
+var Constants = require("constants");
 var Retriever = require('retriever');
 var Settings = require('settings');
 var UI = require('ui');
 
-// Main Menu
-var buildAndShowMainMenu = function() {
-  Pebble.getTimelineToken(
-    function (token) {
-      console.log("Timeline token: " + token);
+Pebble.getTimelineToken(
+  function (token) {
+      Settings.config(
+        { url: Constants.ApiBaseUrl + Constants.ApiUrls.Config + token },
+        function(e) {
+          Settings.option("userid", e.options.userid);
+          Settings.option("apiaccesstoken", e.options.apiaccesstoken);
+        }
+      );
     },
     function (error) {
       console.log("Error getting timeline token: " + error);
     }
-  );
-  
-  Settings.option("userid", 1);
-  Settings.option("apiaccesstoken", "ae9176bd-6396-43b9-88fd-b38b430ab699");
-  
+);
+
+// Main Menu
+var buildAndShowMainMenu = function() {
   var items = [];
   items.push(
     { title: "Hours" }, 
