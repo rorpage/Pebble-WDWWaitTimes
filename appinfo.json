@@ -1,7 +1,8 @@
 {
     "appKeys": {},
     "capabilities": [
-        "location"
+        "location",
+        "configurable"
     ],
     "companyName": "rorpage",
     "longName": "WDWNT Now!",
@@ -36,16 +37,12 @@
             }
         ]
     },
+    "sdkVersion": "3",
     "shortName": "WDWNT Now!",
     "uuid": "5eff1f86-ffd0-41a7-85e2-7076f0116373",
     "versionCode": 1,
-    "versionLabel": "1.3",
+    "versionLabel": "2.0",
     "watchapp": {
         "watchface": false
-    },
-    "targetPlatforms": [
-        "aplite",
-        "basalt"
-    ],
-    "sdkVersion": "3"
+    }
 }
