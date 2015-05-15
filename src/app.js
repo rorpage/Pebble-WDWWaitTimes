@@ -1,13 +1,13 @@
 var Constants = require("constants");
-var Retriever = require('retriever');
-var Settings = require('settings');
-var UI = require('ui');
+var Retriever = require("retriever");
+var Settings = require("settings");
+var UI = require("ui");
 
 Pebble.getTimelineToken(
   function (token) {
       Settings.config(
         { url: Constants.ApiBaseUrl + Constants.ApiUrls.Config + token },
-        function(e) {
+        function (e) {
           Settings.option("userid", e.options.userid);
           Settings.option("apiaccesstoken", e.options.apiaccesstoken);
         }
@@ -19,7 +19,7 @@ Pebble.getTimelineToken(
 );
 
 // Main Menu
-var buildAndShowMainMenu = function() {
+var buildAndShowMainMenu = function () {
   var items = [];
   items.push(
     { title: "Hours" }, 
@@ -38,7 +38,7 @@ var buildAndShowMainMenu = function() {
     }]
   });
 
-  mainMenu.on('select', function(e) {
+  mainMenu.on("select", function (e) {
     if (e.itemIndex === 0) {
       Retriever.getParkHours();
     } else if (e.itemIndex === 1) {

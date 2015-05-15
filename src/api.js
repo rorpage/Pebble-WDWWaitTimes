@@ -1,7 +1,7 @@
-var ajax = require('ajax');
-var Constants = require('constants');
-var Helpers = require('helpers');
-var UI = require('ui');
+var ajax = require("ajax");
+var Constants = require("constants");
+var Helpers = require("helpers");
+var UI = require("ui");
 
 var api = {
   makeApiCall: function (url, successCallback) {
@@ -11,7 +11,7 @@ var api = {
 
     console.log("Loading data...");
     ajax(
-      { url: Constants.ApiBaseUrl + url, type: 'json' },
+      { url: Constants.ApiBaseUrl + url, type: "json" },
       function (data) {
         card.hide();
         Helpers.shortVibrate();

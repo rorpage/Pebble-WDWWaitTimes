@@ -1,9 +1,9 @@
-var UI = require('ui');
-var Vibe = require('ui/vibe');
+var UI = require("ui");
+var Vibe = require("ui/vibe");
 
 var helpers = {
   shortVibrate: function () {
-    Vibe.vibrate('short');
+    Vibe.vibrate("short");
   },
   
   displayScrollableCard: function (title, subtitle, body) {
@@ -23,7 +23,7 @@ var helpers = {
   },
   
   logLocationError: function (error) {
-    console.log('location error (' + error.code + '): ' + error.message);
+    console.log("location error (" + error.code + "): " + error.message);
   },
   
   displayMenu: function (title, items) {
@@ -38,7 +38,7 @@ var helpers = {
   },
   
   logLocation: function (pos) {
-    console.log('lat = ' + pos.coords.latitude + ' lon = ' + pos.coords.longitude);
+    console.log("lat = " + pos.coords.latitude + " lon = " + pos.coords.longitude);
   }
 };
 

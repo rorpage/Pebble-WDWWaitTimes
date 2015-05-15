@@ -1,22 +1,9 @@
-var Helpers = require('helpers');
-var UI = require('ui');
-var Utility = require('utility');
+var Helpers = require("helpers");
+var UI = require("ui");
 
 var display = {
-  displayAttraction: function (data) {
-    var description = Utility.cleanseString(data.Description);
-    var details = description + "\n\nCurrent status:\n" + data.ShortWaitTimeDisplay;
-    Helpers.displayScrollableCard(data.Name, data.Location, details);
-  },
-  
-  displayEntertainment: function (data) {
-    var description = Utility.cleanseString(data.Description);
-    var todaysSchedule = (data.TodaysSchedulesDisplay === "") ? 
-        "Nothing left today" : 
-        data.TodaysSchedulesDisplay;
-    var details = description + 
-        "\n\nToday's schedule:\n" + todaysSchedule;
-    Helpers.displayScrollableCard(data.Name, data.Location, details);
+  displayFacility: function (data) {
+    Helpers.displayScrollableCard(data.Title, data.Subtitle, data.Body);
   },
   
   displayFacilityList: function (data, menuTitle, onclickCallback) {
@@ -59,7 +46,7 @@ var display = {
         var facility = data[i];
         items.push({
           title: facility.Name,
-          subtitle: facility.Time
+          subtitle: facility.Subtitle
         });
       }
     
@@ -130,35 +117,8 @@ var display = {
       var resultsMenu = new UI.Menu({ sections: sections }).show();
       resultsMenu.show();
     } else {
-      var averageEntreePricesDisplay = "";
-      for(var a = 0; a < data.Menus.length; a++) {
-        var menuForEntreeAvg = data.Menus[a];
-        if (menuForEntreeAvg.AverageEntreePrice !== null) {
-          averageEntreePricesDisplay = averageEntreePricesDisplay + 
-            menuForEntreeAvg.MealPeriodType + " - " + 
-            menuForEntreeAvg.AverageEntreePrice + "\n";
-        }
-      }
-      
-      var description = Utility.cleanseString(data.Description);
-      var details = description + 
-          "\n\nCuisine:\n" + data.Cuisine + 
-          "\n\nToday's hours:\n" + data.TodaysHours;
-      
-      if (averageEntreePricesDisplay !== "") {
-        details += "\n\nAverage entrée prices:\n" + averageEntreePricesDisplay;
-      }
-      
-      Helpers.displayScrollableCard(data.Name, data.Location, details);
+      display.displayFacility(data);
     }
-  },
-  
-  displayShop: function (data) {
-    var description = Utility.cleanseString(data.Description);
-    var details = description + 
-        "\n\nMerchandise offerings:\n" + data.MerchandiseOfferingsDisplay + 
-        "\n\nToday's hours:\n" + data.TodaysHours;
-    Helpers.displayScrollableCard(data.Name, data.Location, details);
   },
   
   displayWaitTimes: function (data, onclickCallback) {

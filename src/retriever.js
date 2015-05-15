@@ -1,10 +1,10 @@
-var API = require('api');
-var Constants = require('constants');
-var Display = require('display');
-var Helpers = require('helpers');
-var Settings = require('settings');
-var UI = require('ui');
-var Utility = require('utility');
+var API = require("api");
+var Constants = require("constants");
+var Display = require("display");
+var Helpers = require("helpers");
+var Settings = require("settings");
+var UI = require("ui");
+var Utility = require("utility");
 
 var retriever = {
   getParkHours: function () {
@@ -26,7 +26,7 @@ var retriever = {
           }]
         });
         
-        mainMenu.on('select', function(e) {
+        mainMenu.on("select", function (e) {
           if (e.itemIndex === 0) {
             retriever.getAttractions(parkId);
           } else if (e.itemIndex === 1) {
