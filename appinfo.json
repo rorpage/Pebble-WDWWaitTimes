@@ -30,6 +30,41 @@
                 "type": "font"
             },
             {
+                "file": "images/Weather-24.png",
+                "name": "IMAGES_WEATHER_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/TopAttractions-24.png",
+                "name": "IMAGES_TOPATTRACTIONS_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Ride-24.png",
+                "name": "IMAGES_RIDE_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Plans-24.png",
+                "name": "IMAGES_PLANS_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Hours-24.png",
+                "name": "IMAGES_HOURS_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Dine-24.png",
+                "name": "IMAGES_DINE_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Marker-24.png",
+                "name": "IMAGES_MARKER_24_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/icon.png",
                 "menuIcon": true,
                 "name": "IMAGES_ICON_PNG",

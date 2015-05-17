@@ -1,24 +1,29 @@
 var UI = require("ui");
 var Vector2 = require("vector2");
 var Vibe = require("ui/vibe");
+var WindowUtils = require('ui2/windowUtils');
 
 var helpers = {
   shortVibrate: function () {
     Vibe.vibrate("short");
   },
   
-  displayScrollableCard: function (title, subtitle, body) {
+  displayScrollableCard: function (title, subtitle, body, titleColor) {
     var card = new UI.Card({
+      backgroundColor: "white",
       title: title,
+      titleColor: titleColor || "black",
       subtitle: subtitle,
+      subtitleColor: "blueMoon",
       body: body,
+      bodyColor: "black",
       scrollable: true
     });
   
     card.show();
   },
   
-  displayFacilityWindow: function (name, subtitle, body) {
+  displayFacilityWindow: function (name, subtitle, body, fullscreen) {
     var window = new UI.Window({
       backgroundColor: "white",
       scrollable: true
@@ -30,7 +35,7 @@ var helpers = {
       textOverflow: "fill",
       textAlign: "left",
       position: new Vector2(4, 4),
-      size: new Vector2(140, 164),
+      size: new Vector2(WindowUtils.getWindowWidth(fullscreen) - 8, 168),
       text: body
     });
     
@@ -39,7 +44,7 @@ var helpers = {
   },
   
   displayError: function (message, errorToLog) {
-    helpers.displayScrollableCard("Uh oh!", null, message);
+    helpers.displayScrollableCard("Uh oh!", null, message, "folly");
     console.log(errorToLog);
   },
   

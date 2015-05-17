@@ -6,7 +6,9 @@ var UI = require("ui");
 var api = {
   makeApiCall: function (url, successCallback) {
     var card = new UI.Card({
-      title: "Loading data..."
+      backgroundColor: "black",
+      title: "Please wait",
+      titleColor: "springBud",
     }).show();
 
     console.log("Loading data...");
