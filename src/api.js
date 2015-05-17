@@ -1,15 +1,11 @@
 var ajax = require("ajax");
 var Constants = require("constants");
 var Helpers = require("helpers");
-var UI = require("ui");
 
 var api = {
   makeApiCall: function (url, successCallback) {
-    var card = new UI.Card({
-      backgroundColor: "black",
-      title: "Please wait",
-      titleColor: "springBud",
-    }).show();
+    var card = Helpers.buildLoadingCard();
+    card.show();
 
     console.log("Loading data...");
     ajax(

@@ -8,6 +8,28 @@ var helpers = {
     Vibe.vibrate("short");
   },
   
+  buildCard: function (text) {
+    var splashWindow = new UI.Window();
+    
+    var uiText = new UI.Text({
+      position: new Vector2(0, 46),
+      size: new Vector2(144, 15),
+      text: text,
+      font: "GOTHIC_28_BOLD",
+      color: "springBud",
+      textOverflow: "wrap",
+      textAlign: "center",
+      backgroundColor: "black"
+    });
+    
+    splashWindow.add(uiText);
+    return splashWindow;
+  },
+  
+  buildLoadingCard: function () {
+    return helpers.buildCard("Please wait");
+  },
+  
   displayScrollableCard: function (title, subtitle, body, titleColor) {
     var card = new UI.Card({
       backgroundColor: "white",
