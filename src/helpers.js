@@ -1,4 +1,5 @@
 var UI = require("ui");
+var Vector2 = require("vector2");
 var Vibe = require("ui/vibe");
 
 var helpers = {
@@ -15,6 +16,26 @@ var helpers = {
     });
   
     card.show();
+  },
+  
+  displayFacilityWindow: function (name, subtitle, body) {
+    var window = new UI.Window({
+      backgroundColor: "white",
+      scrollable: true
+    });
+    
+    var windowBody = new UI.Text({
+      backgroundColor: "white",
+      color: "black",
+      textOverflow: "fill",
+      textAlign: "left",
+      position: new Vector2(4, 4),
+      size: new Vector2(140, 164),
+      text: body
+    });
+    
+    window.add(windowBody);
+    window.show();
   },
   
   displayError: function (message, errorToLog) {
