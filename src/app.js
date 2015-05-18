@@ -31,12 +31,12 @@ gridItems.push(
 var grid = new Grid({
   fullscreen: fullscreen,
   itemsPerRow: 3,
-  backgroundColor: "black",
+  backgroundColor: "white",
   borderSpacing: 1,
   itemDefaultStyle: {
     titleColor: "white",
     backgroundColor: "darkGray",
-    highlightBackgroundColor: "chromeYellow",
+    highlightBackgroundColor: "orange",
     borderWidth: 0
   },
   items: gridItems

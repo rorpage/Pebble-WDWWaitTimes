@@ -205,18 +205,16 @@ var retriever = {
     retriever.retrieveFacilities(parkId, "restaurant", "Restaurants", callback);
   },
   
-  retrieveRestaurant: function (id, isMenu) {
+  getRestaurant: function (id) {
     API.makeApiCall(Constants.ApiUrls.GetRestaurant + id, function (data) {
-      Display.displayRestaurant(data, isMenu);
+      Display.displayRestaurant(data, false);
     });
   },
   
-  getRestaurant: function (id) {
-    retriever.retrieveRestaurant(id, false);
-  },
-  
   getRestaurantMenu: function (id) {
-    retriever.retrieveRestaurant(id, true);
+    API.makeApiCall(Constants.ApiUrls.GetMenus + id, function (data) {
+      Display.displayRestaurant(data, true);
+    });
   },
   
   getShops: function (parkId) {

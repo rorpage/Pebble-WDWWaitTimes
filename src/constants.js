@@ -6,6 +6,7 @@ var constants = {
     GetAttraction: "/pebble/api/getattraction/",
     GetEntertainment: "/pebble/api/getentertainment/",
     GetFacilities: "/pebble/api/getfacilities",
+    GetMenus: "/pebble/api/getmenus?id=",
     GetParkHours: "/basicparkinfo/get?getparksonly=true",
     GetPlans: "/pebble/api/getitinerary/",
     GetRestaurant: "/pebble/api/getrestaurant/",

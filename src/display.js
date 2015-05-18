@@ -39,28 +39,35 @@ var display = {
   
   displayPlans: function (data, onclickCallback) {
     var items = [];
-    
+    var days = [];
     if (data.length === 0) {
       Helpers.displayScrollableCard("None currently listed");
     } else {
-      for(var i = 0; i < data.length; i++) {
-        var facility = data[i];
-        items.push({
-          title: facility.Name,
-          subtitle: facility.Subtitle
+      for(var d = 0; d < data.length; d++) {
+        var day = data[d];
+        for(var i = 0; i < day.Items.length; i++) {
+          var item = day.Items[i];
+          items.push({
+            title: item.Name,
+            subtitle: item.Subtitle
+          });
+        }
+        
+        days.push({
+          title: day.Date,
+          items: items
         });
+        
+        items = [];
       }
     
       var resultsMenu = new UI.Menu({
-        sections: [{
-          title: "Your Plans",
-          items: items
-        }]
+        sections: days
       });
     
-      resultsMenu.on('select', function(e) {
-        var facility = data[e.itemIndex];
-        onclickCallback(facility);
+      resultsMenu.on("select", function(e) {
+        var item = data[e.sectionIndex].Items[e.itemIndex];
+        onclickCallback(item);
       });
     
       resultsMenu.show();
@@ -97,8 +104,8 @@ var display = {
     if (isMenu) {
       var items = [];
       var sections = [];
-      for(var m = 0; m < data.Menus.length; m++) {
-        var menu = data.Menus[m];
+      for(var m = 0; m < data.Result.length; m++) {
+        var menu = data.Result[m];
         for(var i = 0; i < menu.MenuItems.length; i++) {
           var menuItem = menu.MenuItems[i];
           items.push({
