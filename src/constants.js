@@ -17,6 +17,13 @@ var constants = {
     GetWhatsNearMe: "/Distance/WhatsNearMe"
   },
   
+  "ParkIds": {
+    MagicKingdom: 80007944,
+    Epcot: 80007838,
+    HollywoodStudios: 80007998,
+    AnimalKingdom: 80007823
+  },
+  
   locationOptions: {
     enableHighAccuracy: true, 
     maximumAge: 10000, 

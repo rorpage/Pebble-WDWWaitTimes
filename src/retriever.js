@@ -64,65 +64,11 @@ var retriever = {
   },
   
   getRideList: function () {
-    var items = [];
-        items.push(
-          { title: "Magic Kingdom" }, 
-          { title: "Epcot" }, 
-          { title: "Hollywood Studios" }, 
-          { title: "Animal Kingdom" }
-        );
-    
-        var mainMenu = new UI.Menu({
-          sections: [{
-            title: "Theme Parks",
-            items: items
-          }]
-        });
-        
-        mainMenu.on('select', function(e) {
-          if (e.itemIndex === 0) {
-            retriever.getAttractions(80007944);
-          } else if (e.itemIndex === 1) {
-            retriever.getAttractions(80007838);
-          } else if (e.itemIndex === 2) {
-            retriever.getAttractions(80007993);
-          } else if (e.itemIndex === 3) {
-            retriever.getAttractions(80007823);
-          }
-        });
-    
-        mainMenu.show();
+    Helpers.buildParkMenu(retriever.getAttractions);
   },
   
   getDineList: function () {
-        var items = [];
-        items.push(
-          { title: "Magic Kingdom" }, 
-          { title: "Epcot" }, 
-          { title: "Hollywood Studios" }, 
-          { title: "Animal Kingdom" }
-        );
-    
-        var mainMenu = new UI.Menu({
-          sections: [{
-            title: "Theme Parks",
-            items: items
-          }]
-        });
-        
-        mainMenu.on('select', function(e) {
-          if (e.itemIndex === 0) {
-            retriever.getRestaurants(80007944);
-          } else if (e.itemIndex === 1) {
-            retriever.getRestaurants(80007838);
-          } else if (e.itemIndex === 2) {
-            retriever.getRestaurants(80007993);
-          } else if (e.itemIndex === 3) {
-            retriever.getRestaurants(80007823);
-          }
-        });
-    
-        mainMenu.show();
+    Helpers.buildParkMenu(retriever.getRestaurants);
   },
   
   getPlans: function () {
