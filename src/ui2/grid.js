@@ -37,9 +37,8 @@ Grid.prototype._loadElements = function() {
   var itemsPerRow = this.state.itemsPerRow;
   var borderSpacing = this.state.borderSpacing;
 
-  var itemSize = (WindowUtils.getWindowWidth(this.state.fullscreen) -
-                 (borderSpacing * 2 * itemsPerRow)) / itemsPerRow;
-
+  var itemSize = (WindowUtils.getWindowWidth(this.state.fullscreen) - (borderSpacing * 2 * itemsPerRow)) / itemsPerRow;
+  
   for (var i = 0; i < this.state.items.length; i++) {
     var item = myutil.shadow(this.state.itemDefaultStyle, this.state.items[i] || {});
     var sizeWithMargin = (itemSize + borderSpacing * 2);

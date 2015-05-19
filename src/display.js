@@ -4,7 +4,6 @@ var UI = require("ui");
 var display = {
   displayFacility: function (data) {
     Helpers.displayScrollableCard(data.Title, data.Subtitle, data.Body);
-    //Helpers.displayFacilityWindow(data.Title, data.Subtitle, data.Body, true);
   },
   
   displayFacilityList: function (data, menuTitle, onclickCallback) {

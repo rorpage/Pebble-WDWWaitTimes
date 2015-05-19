@@ -2,6 +2,7 @@ var Constants = require("constants");
 var Grid = require("ui2/grid");
 var Theme = require("theme");
 var UI = require("ui");
+var Utility = require("utility");
 var Vector2 = require("vector2");
 var Vibe = require("ui/vibe");
 var WindowUtils = require('ui2/windowUtils');
@@ -33,7 +34,38 @@ var helpers = {
     return helpers.buildCard("Please wait");
   },
   
-  buildParkMenu: function(callback) {
+  buildApliteParkMenu: function(callback) {
+    var items = [];
+    items.push(
+      { title: "Magic Kingdom" }, 
+      { title: "Epcot" }, 
+      { title: "Hollywood Studios" }, 
+      { title: "Animal Kingdom" }
+    );
+
+    var mainMenu = new UI.Menu({
+      sections: [{
+        title: "Theme Parks",
+        items: items
+      }]
+    });
+
+    mainMenu.on("select", function(e) {
+      if (e.itemIndex === 0) {
+        callback(Constants.ParkIds.MagicKingdom);
+      } else if (e.itemIndex === 1) {
+        callback(Constants.ParkIds.Epcot);
+      } else if (e.itemIndex === 2) {
+        callback(Constants.ParkIds.HollywoodStudios);
+      } else if (e.itemIndex === 3) {
+        callback(Constants.ParkIds.AnimalKingdom);
+      }
+    });
+
+    mainMenu.show();
+  },
+  
+  buildBasaltParkMenu: function(callback) {
     var currentIndex, prevIndex = 0;
     var helpbar = new UI.Text({
       text: "WDWNT Now!",
@@ -89,6 +121,14 @@ var helpers = {
     
     grid.add(helpbar);
     grid.show();
+  },
+  
+  buildParkMenu: function(callback) {
+    if (Utility.isBasalt()) {
+      helpers.buildBasaltParkMenu(callback);
+    } else {
+      helpers.buildApliteParkMenu(callback);
+    }
   },
   
   displayScrollableCard: function(title, subtitle, body, titleColor) {

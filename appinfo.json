@@ -31,6 +31,16 @@
                 "type": "font"
             },
             {
+                "file": "images/Ride-24-Black.png",
+                "name": "IMAGES_RIDE_24_BLACK_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/Ride-24.png",
+                "name": "IMAGES_RIDE_24_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/E-75.png",
                 "name": "IMAGES_E_75_PNG",
                 "type": "png"
@@ -63,11 +73,6 @@
             {
                 "file": "images/TopAttractions-24.png",
                 "name": "IMAGES_TOPATTRACTIONS_24_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/Ride-24.png",
-                "name": "IMAGES_RIDE_24_PNG",
                 "type": "png"
             },
             {
