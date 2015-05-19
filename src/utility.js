@@ -1,4 +1,11 @@
 var utility = {
+  isBasalt: function() {
+    var platform = (Pebble.getActiveWatchInfo) ?
+      Pebble.getActiveWatchInfo().platform :
+      "aplite";
+    return platform === "basalt";
+  },
+  
   getFacilityName: function (facilityId) {
     // WDW
     if (facilityId === 80007944) {

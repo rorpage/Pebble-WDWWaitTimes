@@ -1,5 +1,6 @@
 var Constants = require("constants");
 var Grid = require("ui2/grid");
+var Theme = require("theme");
 var UI = require("ui");
 var Vector2 = require("vector2");
 var Vibe = require("ui/vibe");
@@ -36,7 +37,7 @@ var helpers = {
     var currentIndex, prevIndex = 0;
     var helpbar = new UI.Text({
       text: "WDWNT Now!",
-      backgroundColor: "blueMoon",
+      backgroundColor: Theme.HelpbarBackgroundColor,
       font: "GOTHIC_14",
       position: new Vector2(0, WindowUtils.getWindowHeight(true) - 20),
       size: new Vector2(WindowUtils.getWindowWidth(true), 20)
@@ -53,12 +54,12 @@ var helpers = {
     var grid = new Grid({
       fullscreen: true,
       itemsPerRow: 2,
-      backgroundColor: "white",
+      backgroundColor: Theme.GridBackgroundColor,
       borderSpacing: 1,
       itemDefaultStyle: {
-        titleColor: "white",
-        backgroundColor: "darkGray",
-        highlightBackgroundColor: "orange",
+        titleColor: Theme.GridItemTitle,
+        backgroundColor: Theme.GridItemBackgroundColor,
+        highlightBackgroundColor: Theme.GridItemHighlightBackgroundColor,
         borderWidth: 0
       },
       items: gridItems
