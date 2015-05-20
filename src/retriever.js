@@ -72,20 +72,25 @@ var retriever = {
   },
   
   getPlans: function () {
-    var url = Constants.ApiUrls.GetPlans + 
-      "?userid=" + Settings.option("userid") +
-      "&apiaccesstoken=" + Settings.option("apiaccesstoken");
-    API.makeApiCall(url, function (data) {
-      Display.displayPlans(data, function (facility) {
-        if (facility.FacilityType === 0) {
-          retriever.getAttraction(facility.FacilityId);
-        } else if (facility.FacilityType === 2) {
-          retriever.getEntertainment(facility.FacilityId);
-        } else if (facility.FacilityType === 8) {
-          retriever.getRestaurant(facility.FacilityId);
-        }
+    if (Settings.option("userid") && Settings.option("apiaccesstoken")) {
+      var url = Constants.ApiUrls.GetPlans + 
+        "?userid=" + Settings.option("userid") +
+        "&apiaccesstoken=" + Settings.option("apiaccesstoken");
+      API.makeApiCall(url, function (data) {
+        Display.displayPlans(data, function (facility) {
+          if (facility.FacilityType === 0) {
+            retriever.getAttraction(facility.FacilityId);
+          } else if (facility.FacilityType === 2) {
+            retriever.getEntertainment(facility.FacilityId);
+          } else if (facility.FacilityType === 8) {
+            retriever.getRestaurant(facility.FacilityId);
+          }
+        });
       });
-    });
+    } else {
+      Helpers.shortVibrate();
+      Helpers.displayError("We couldn't retrieve your plans. Perhaps you haven't configured your settings yet?");
+    }
   },
   
   retrieveFacilities: function (location, facilityType, facilityListMenuTitle, facilityListOnclickCallback) {

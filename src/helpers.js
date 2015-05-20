@@ -40,7 +40,9 @@ var helpers = {
       { title: "Magic Kingdom" }, 
       { title: "Epcot" }, 
       { title: "Hollywood Studios" }, 
-      { title: "Animal Kingdom" }
+      { title: "Animal Kingdom" },
+      { title: "Disneyland" },
+      { title: "California Adventure" }
     );
 
     var mainMenu = new UI.Menu({
@@ -59,6 +61,10 @@ var helpers = {
         callback(Constants.ParkIds.HollywoodStudios);
       } else if (e.itemIndex === 3) {
         callback(Constants.ParkIds.AnimalKingdom);
+      } else if (e.itemIndex === 4) {
+        callback(Constants.ParkIds.Disneyland);
+      } else if (e.itemIndex === 5) {
+        callback(Constants.ParkIds.CaliforniaAdventure);
       }
     });
 
@@ -80,12 +86,14 @@ var helpers = {
       { helpbarText: "Magic Kingdom", icon: "images/M-75.png" },
       { helpbarText: "Epcot", icon: "images/E-75.png" },
       { helpbarText: "Hollywood Studios", icon: "images/H-75.png" },
-      { helpbarText: "Animal Kingdom", icon: "images/A-75.png" }
+      { helpbarText: "Animal Kingdom", icon: "images/A-75.png" },
+      { helpbarText: "Disneyland", icon: "images/D-75.png" },
+      { helpbarText: "California Adventure", icon: "images/C-75.png" }
     );
     
     var grid = new Grid({
       fullscreen: true,
-      itemsPerRow: 2,
+      itemsPerRow: 3,
       backgroundColor: Theme.GridBackgroundColor,
       borderSpacing: 1,
       itemDefaultStyle: {
@@ -116,6 +124,10 @@ var helpers = {
         callback(Constants.ParkIds.HollywoodStudios);
       } else if (currentIndex === 3) {
         callback(Constants.ParkIds.AnimalKingdom);
+      } else if (currentIndex === 4) {
+        callback(Constants.ParkIds.Disneyland);
+      } else if (currentIndex === 5) {
+        callback(Constants.ParkIds.CaliforniaAdventure);
       }
     });
     

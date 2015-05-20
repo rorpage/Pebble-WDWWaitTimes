@@ -86,12 +86,12 @@ var display = {
   
     var resultsMenu = new UI.Menu({
       sections: [{
-        title: "Today's Park Hours",
+        title: "Today's Hours",
         items: items
       }]
     });
   
-    resultsMenu.on('select', function(e) {
+    resultsMenu.on("select", function(e) {
       var park = data[e.itemIndex];
       onclickCallback(park.Id);
     });

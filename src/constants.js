@@ -7,7 +7,8 @@ var constants = {
     GetEntertainment: "/pebble/api/getentertainment/",
     GetFacilities: "/pebble/api/getfacilities",
     GetMenus: "/pebble/api/getmenus?id=",
-    GetParkHours: "/basicparkinfo/get?getparksonly=true",
+    //GetParkHours: "/basicparkinfo/get?getparksonly=true",
+    GetParkHours: "/pebble/api/getparkhours",
     GetPlans: "/pebble/api/getitinerary/",
     GetRestaurant: "/pebble/api/getrestaurant/",
     GetShop: "/pebble/api/getshop/",
@@ -21,7 +22,9 @@ var constants = {
     MagicKingdom: 80007944,
     Epcot: 80007838,
     HollywoodStudios: 80007998,
-    AnimalKingdom: 80007823
+    AnimalKingdom: 80007823,
+    Disneyland: 330339,
+    CaliforniaAdventure: 336894
   },
   
   locationOptions: {

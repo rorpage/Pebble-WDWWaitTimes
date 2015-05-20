@@ -31,6 +31,16 @@
                 "type": "font"
             },
             {
+                "file": "images/C-75.png",
+                "name": "IMAGES_C_75_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/D-75.png",
+                "name": "IMAGES_D_75_PNG",
+                "type": "png"
+            },
+            {
                 "file": "images/Ride-24-Black.png",
                 "name": "IMAGES_RIDE_24_BLACK_PNG",
                 "type": "png"
