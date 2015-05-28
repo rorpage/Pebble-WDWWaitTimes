@@ -83,12 +83,12 @@ var helpers = {
   
     var gridItems = [];
     gridItems.push(
-      { helpbarText: "Magic Kingdom", icon: "images/M-75.png" },
-      { helpbarText: "Epcot", icon: "images/E-75.png" },
-      { helpbarText: "Hollywood Studios", icon: "images/H-75.png" },
-      { helpbarText: "Animal Kingdom", icon: "images/A-75.png" },
-      { helpbarText: "Disneyland", icon: "images/D-75.png" },
-      { helpbarText: "California Adventure", icon: "images/C-75.png" }
+      { helpbarText: "Magic Kingdom", icon: "images/M-24.png" },
+      { helpbarText: "Epcot", icon: "images/E-24.png" },
+      { helpbarText: "Hollywood Studios", icon: "images/H-24.png" },
+      { helpbarText: "Animal Kingdom", icon: "images/A-24.png" },
+      { helpbarText: "Disneyland", icon: "images/D-24.png" },
+      { helpbarText: "California Adventure", icon: "images/C-24.png" }
     );
     
     var grid = new Grid({

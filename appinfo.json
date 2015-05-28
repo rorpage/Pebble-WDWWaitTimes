@@ -31,13 +31,33 @@
                 "type": "font"
             },
             {
-                "file": "images/C-75.png",
-                "name": "IMAGES_C_75_PNG",
+                "file": "images/M-24.png",
+                "name": "IMAGES_M_24_PNG",
                 "type": "png"
             },
             {
-                "file": "images/D-75.png",
-                "name": "IMAGES_D_75_PNG",
+                "file": "images/H-24.png",
+                "name": "IMAGES_H_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/E-24.png",
+                "name": "IMAGES_E_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/D-24.png",
+                "name": "IMAGES_D_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/C-24.png",
+                "name": "IMAGES_C_24_PNG",
+                "type": "png"
+            },
+            {
+                "file": "images/A-24.png",
+                "name": "IMAGES_A_24_PNG",
                 "type": "png"
             },
             {
@@ -48,26 +68,6 @@
             {
                 "file": "images/Ride-24.png",
                 "name": "IMAGES_RIDE_24_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/E-75.png",
-                "name": "IMAGES_E_75_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/H-75.png",
-                "name": "IMAGES_H_75_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/A-75.png",
-                "name": "IMAGES_A_75_PNG",
-                "type": "png"
-            },
-            {
-                "file": "images/M-75.png",
-                "name": "IMAGES_M_75_PNG",
                 "type": "png"
             },
             {
@@ -111,7 +111,7 @@
     "shortName": "WDWNT Now!",
     "uuid": "5eff1f86-ffd0-41a7-85e2-7076f0116373",
     "versionCode": 1,
-    "versionLabel": "2.0",
+    "versionLabel": "2.1",
     "watchapp": {
         "watchface": false
     }

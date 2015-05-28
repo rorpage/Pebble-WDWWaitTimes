@@ -1,9 +1,18 @@
 var utility = {
   isBasalt: function() {
-    var platform = (Pebble.getActiveWatchInfo) ?
-      Pebble.getActiveWatchInfo().platform :
-      "aplite";
-    return platform === "basalt";
+//     var platform = (Pebble.getActiveWatchInfo) ?
+//       Pebble.getActiveWatchInfo().platform :
+//       "aplite";
+//     return platform === "basalt";
+    if (Pebble.getActiveWatchInfo) {
+      try {
+        return Pebble.getActiveWatchInfo();
+      } catch(err) {
+        return "basalt";
+      }
+    } else {
+      return "aplite";
+    }
   },
   
   getFacilityName: function (facilityId) {
